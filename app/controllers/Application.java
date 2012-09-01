@@ -11,8 +11,12 @@ public class Application extends Controller {
     return ok(index.render("Your new application is ready."));
   }
   
-  public static Result juggle(String aSs) {
-	  return ok(juggle.render(aSs));
+  public static Result juggle() {
+	  return ok(juggle.render());
+  }
+  
+  public static Result staticPage() {
+	  return ok(staticPage.render());
   }
   
 }
