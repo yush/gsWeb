@@ -1,0 +1,11 @@
+@(aForm: Form[Application.Siteswap])
+
+@import helper.twitterBootstrap._
+
+@main("Formulaire basique") {
+	<div>test formulaire</div>
+	@helper.form(action = routes.Application.responseBasicForm()) {
+	@helper.inputText(aForm("ssBase"))	
+    <button type="submit" class="btn">test</button>
+	}
+}
