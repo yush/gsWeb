@@ -1,6 +1,15 @@
 @main("Saisie du siteswap généralisé") {
 	<h2>Grille de saisie</h2>
-	<div>
-		
+	<div class="claro">
+    <button id="convertForm">Click to convert the form to JSON</button><br><br>
+			<b>The FORM</b><br><br>
+			<form id="gridForm">
+			   <input type="text" name="field1[0]" value="value1">
+			   <input type="text" name="field1[1]" value="value2">
+			   <input type="button" name="someButton" value="someValue">
+			</form>
+			<br><br>
+			<b>The form as JSON:</b>
+			<pre id="output"></pre>		
 	</div>
 }
