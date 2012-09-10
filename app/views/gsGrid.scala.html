@@ -1,15 +1,21 @@
 @main("Saisie du siteswap généralisé") {
 	<h2>Grille de saisie</h2>
 	<div class="claro">
-    <button id="convertForm">Click to convert the form to JSON</button><br><br>
-			<b>The FORM</b><br><br>
-			<form id="gridForm">
-			   <input type="text" name="field1[0]" value="value1">
-			   <input type="text" name="field1[1]" value="value2">
-			   <input type="button" name="someButton" value="someValue">
-			</form>
-			<br><br>
-			<b>The form as JSON:</b>
-			<pre id="output"></pre>		
+	<div id="jlabApplet">
+	    <applet archive="/assets/javascripts/jugglingLab.jar" code="JugglingLab" width="600" height="500">
+	    <param name="config" value="entry=none;view=edit">
+	    <param name="notation" value="siteswap">
+	    <param name="pattern" value="3">
+	    </applet>		
+	</div>
+	
+	<button id="convertForm">Juggle it</button><br><br>
+	<form id="gridForm">
+	   <input type="text" name="vnSiteswap" value="value1">
+	</form>
+	<br><br>
+	<b>The form as JSON:</b>
+	<pre id="output"></pre>
+	
 	</div>
 }
