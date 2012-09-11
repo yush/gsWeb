@@ -2,7 +2,7 @@
 	<h2>Grille de saisie</h2>
 	<div class="claro">
 	<div id="jlabApplet">
-	    <applet archive="/jugglinglab.jar" code="JugglingLab" width="600" height="500">
+	    <applet archive="/assets/javascripts/JugglingLab.jar" code="JugglingLab" width="600" height="500">
 	    <param name="config" value="entry=none;view=edit">
 	    <param name="notation" value="siteswap">
 	    <param name="pattern" value="3">
@@ -12,6 +12,13 @@
 	<button id="convertForm">Juggle it</button><br><br>
 	<form id="gridForm">
 	   <input type="text" name="vnSiteswap" value="value1">
+	</form>
+	<form>
+		<input type='text' name"ssBase"/>
+		<input type='text' name"thrHand"/>
+		<input type='text' name"catHand"/>
+		<input type='text' name"thrPosition"/>
+		<input type='text' name"catPosition"/>
 	</form>
 	<br><br>
 	<b>The form as JSON:</b>

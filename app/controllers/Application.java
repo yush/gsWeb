@@ -6,11 +6,13 @@ import play.data.*;
 import play.data.validation.Constraints.Required;
 import play.mvc.BodyParser;                     
 import play.libs.Json;
-import play.libs.Json.*; 
-import static play.libs.Json.toJson;
-import org.codehaus.jackson.JsonNode;           
-import org.codehaus.jackson.node.ObjectNode;  
+
+import org.codehaus.jackson.*;
+import org.codehaus.jackson.map.*;
+import org.codehaus.jackson.node.*;
+
 import views.html.*;
+import models.GSSiteswap;
 
 public class Application extends Controller {
   
@@ -41,6 +43,7 @@ public class Application extends Controller {
   }
   
   public static Result gsGrid() {
+	  ObjectMapper mapper = new ObjectMapper();
 	  return ok(gsGrid.render());
   }
   
@@ -49,19 +52,21 @@ public class Application extends Controller {
   }  
   
   public static Result gsSiteswap() {
-	  JsonNode json = request().body().asJson();
-	  if(json == null) {
-		    return badRequest("Expecting Json data");
-		  } else {
-			  String vnSs = json.findPath("vnSiteswap").getTextValue();
-			  return ok(gsSiteswap.render(vnSs));	
-		  }
-//    String name = json.findPath("vnSiteswap").getTextValue();
-//    if(name == null) {
-//      return badRequest("Missing parameter vnSiteswap");
-//    } else {
-//    	return ok(gsSiteswap.render(name));
-//    }
+
+   // String name = json.findPath("vnSiteswap").getTextValue();
+  //  if(name == null) {
+      return badRequest("Missing parameter vnSiteswap");
+  //  } else {
+  //  	return ok(gsSiteswap.render(name));
+ //  }
+  }
+  
+  public static Result ssJson() {
+	  ObjectNode result = Json.newObject();
+	  GSSiteswap trick = new GSSiteswap();
+	  
+	  trick.setSsBase("Doe");
+	  return ok(Json.toJson(trick));
   }
   
 }
