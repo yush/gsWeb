@@ -3,12 +3,13 @@
 # ~~~~
 
 # Home page
-GET     /doc                            controllers.Application.index()
+GET   /doc                            controllers.Application.index()
 GET		/juggle							controllers.Application.juggle()
 GET		/basicForm						controllers.Application.basicForm()
 GET		/response						controllers.Application.responseBasicForm()
 GET		/gsGrid							controllers.Application.gsGrid()
 POST  /gsSiteswap						controllers.Application.gsSiteswap()
+GET	  /jugglinglab.jar							controllers.Application.jlab()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

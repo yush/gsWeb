@@ -6,7 +6,7 @@ import play.data.*;
 import play.data.validation.Constraints.Required;
 import play.mvc.BodyParser;                     
 import play.libs.Json;
-import play.libs.Json.*;                        
+import play.libs.Json.*; 
 import static play.libs.Json.toJson;
 import org.codehaus.jackson.JsonNode;           
 import org.codehaus.jackson.node.ObjectNode;  
@@ -43,6 +43,10 @@ public class Application extends Controller {
   public static Result gsGrid() {
 	  return ok(gsGrid.render());
   }
+  
+  public static Result jlab() {
+	  return redirect("http://jugglinglab.sourceforge.net/bin/JugglingLab.jar");
+  }  
   
   public static Result gsSiteswap() {
 	  JsonNode json = request().body().asJson();
