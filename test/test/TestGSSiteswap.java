@@ -4,6 +4,11 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import org.apache.commons.io.FileUtils;
 
 import play.*;
 import play.mvc.*;
@@ -16,7 +21,7 @@ import org.junit.Test;
 
 
 import org.codehaus.jackson.*;
-import org.codehaus.jackson.map.*;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.node.*;
 
 public class TestGSSiteswap {
@@ -32,11 +37,20 @@ public class TestGSSiteswap {
 	
 	@Test
 	public void jsonTest() {
-		File aFile = new File("cascade.json");
-		aFile.toString();
-		GSSiteswap aTrick = Json.fromJson( Json.parse("{\"ssBase\":\"Doe\",\"listMvmt\":[{\"thrHand\":\"r\",\"thrPos\":\"c\"},{\"thrHand\":\"l\",\"thrPos\":\"c\"}]}"), GSSiteswap.class);
-		//GSSiteswap aTrick = Json.fromJson( Json.parse(Json.stringify ), GSSiteswap.class);
-		assertTrue(aTrick.getSsBase().equals("Doe"));
-		//toJson(nameStruct);
+		String content;
+		File file = new File("c:\\Users\\clem\\Dropbox\\common\\code\\gsWeb\\test\\test\\jsonInput\\cascade.json");
+        try
+        {
+            content = FileUtils.readFileToString(file);
+            System.out.println("File content: " + content);
+    		JsonNode aJNode= Json.parse(content);
+    		GSSiteswap aTrick = Json.fromJson(aJNode, GSSiteswap.class);
+    		assertTrue(aTrick.getSsBase().equals("John Doe"));
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }		
+		
+
 	}
 }
