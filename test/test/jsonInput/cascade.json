@@ -1,1 +1,18 @@
-{"ssBase":"John Doe","listMvmt":[{"thrHand":"r","thrPos":"c"},{"thrHand":"l","thrPos":"c"}]}
+{
+	"ssName": "cascade",
+	"listMvmt": [
+		{
+			"ssBase": "3",
+			"thrHand": "r",
+			"thrPos": "c",
+			"catHand": "l",
+			"catPos":"l"
+		}, {
+			"ssBase": "3",
+			"thrHand": "l",
+			"thrPos": "c",
+			"catHand": "r",
+			"catPos": "r"			
+		}
+	]
+}

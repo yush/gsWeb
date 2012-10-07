@@ -1,0 +1,14 @@
+{
+	"ssName": "John Doe",
+	"listMvmt": [
+		{
+			"ssBase": "3",
+			"thrHand": "r",
+			"thrPos": "c"
+		}, {
+			"ssBase": "3",
+			"thrHand": "l",
+			"thrPos": "c"
+		}
+	]
+}

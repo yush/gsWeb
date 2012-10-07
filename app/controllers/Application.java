@@ -17,7 +17,7 @@ import models.GSSiteswap;
 public class Application extends Controller {
   
   public static class Siteswap {
-	  @Required public String ssBase;
+	  @Required public String ssName;
   }
 	
   public static Result index() {
@@ -65,7 +65,7 @@ public class Application extends Controller {
 	  ObjectNode result = Json.newObject();
 	  GSSiteswap trick = new GSSiteswap();
 	  
-	  trick.setSsBase("Doe");
+	  trick.setSsName("Doe");
 	  return ok(Json.toJson(trick));
   }
   
