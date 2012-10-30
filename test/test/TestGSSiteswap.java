@@ -61,12 +61,12 @@ public class TestGSSiteswap {
         }		
 	}
 	
-	/*
 	
 	public void testCascadeInverse() {
 		assertTrue("Cascade inverse", aTrick.asJlabHandNotation().equals("(32)(0).(32)(0)."));	
 	}
 	
+	/*
 	public void testHalfShower() {
 		assertTrue("Half shower", aTrick.asJlabHandNotation().equals("(32)(0).(0)(32)."));	
 	}	

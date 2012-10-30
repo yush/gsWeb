@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.8.0/dijit/themes/claro/claro.css">
+	
+	<script>dojoConfig = {async: true, parseOnLoad: true}</script>
+	<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.8.0/dojo/dojo.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.8.0/dijit/dijit.js"></script>
+	<script>require(["dojo/dom-form", "dojo/dom", "dojo/on", "dojo/query", "dojo/parser", "dojo/_base/array", "dijit/form/ComboBox", "dijit/form/Select", "dojo/domReady!"],
+	function(domForm, dom, on, query, parser, array){
+	  on(dom.byId("convertFields"), "click", function(){
+			var aNode;
+			// Attach it into the DOM as pretty-printed text.
+			dom.byId("output").innerHTML = 'test';
+			aNode = dom.byId("col-1");
+			console.info(aNode);
+			
+			var Test = function(aNode) {				
+				num = aNode.id.substring(4);
+				ssBase = domForm.fieldToObject("ssBase-"+num);
+				thrHand = domForm.fieldToObject("thrHand-"+num);
+				thrPos = domForm.fieldToObject("thrPos-"+num);
+				catHand = domForm.fieldToObject("catHand-"+num);
+				catPos = domForm.fieldToObject("catPos-"+num);			
+				this.toJson = function() {
+					return '{"ssBase"="'+ssBase+'", '+
+							 '"thrHand"="'+thrHand+'"'+
+							 '"thrPos"="'+thrPos+'"'+
+							 '"catHand"="'+catHand+'"'+
+							 '"catPos"="'+catPos+'"'+
+							 '}';
+				}
+			};
+			
+			
+			colList = query('div[id^="col-"]');
+			var strJson = '{"listMvmt":[';
+			array.forEach(colList, function(aCol) {
+			  aColObj = new Test(aCol);
+			  strJson = strJson + (aColObj.toJson()) +',';
+			});
+			strJson = strJson + ']};'
+			console.info(strJson);
+		});
+
+	});</script>
+</head>
+
+<body class="claro">
+	
+	<div data-dojo-type="dojo/store/Memory"
+		 data-dojo-id="ssStore"
+		 data-dojo-props="data: [{id: '0', label:'0', name: '0'},
+		 												 {id: '1', label:'0',name: '1'},
+		 												 {id: '2', label:'0',name: '2'},
+		 												 {id: '3', label:'0',name: '3'},
+		 												 {id: '4', label:'0',name: '4'}, 
+		 												 {id: '5', label:'0',name: '5'}]">
+		 </div>		 	
+	<div data-dojo-type="dojo/store/Memory"
+		 data-dojo-id="handStore"
+		 data-dojo-props="data: [{id: 'L', name: 'left'}, {id: 'R', name: 'right'}]"></div>	
+	<div data-dojo-type="dojo/store/Memory"
+		 data-dojo-id="posStore"
+		 data-dojo-props="data: [{id: 'l', name: 'left'}, {id: 'c', name: 'center'}, {id: 'r', name: 'right'}]"></div>	
+	
+  <button id="convertFields">Click to convert the form to an object</button>
+	<b>The FORM</b><br><br>
+	<form id="col">
+		<div id="col-1">
+			ssBase<input id="ssBase-1" data-dojo-type="dijit/form/ComboBox" data-dojo-props="store:ssStore, searchAttr:'name'" name="thrHand-1" value="" />
+			thrHand<input id="thrHand-1" data-dojo-type="dijit/form/ComboBox" data-dojo-props="store:handStore, searchAttr:'name'" name="thrHand-1" value="" />
+			thrPos<input id="thrPos-1" data-dojo-type="dijit/form/ComboBox" data-dojo-props="store:posStore, searchAttr:'name'" name="thrPos-1" value=""/>
+			catHand<input id="catHand-1" data-dojo-type="dijit/form/ComboBox" data-dojo-props="store:handStore, searchAttr:'name'" name="catHand-1" value=""/>
+			catPos<input id="catPos-1" data-dojo-type="dijit/form/ComboBox" data-dojo-props="store:posStore, searchAttr:'name'" name="catPos-1" value=""/>
+		</div>
+		<div id="col-2">
+			ssBase<input id="ssBase-2" data-dojo-type="dijit/form/ComboBox" name="ssBase-2" value="" />
+			thrHand<input id="thrHand-2" data-dojo-type="dijit/form/ComboBox" name="thrHand-2" value="" />
+			thrPos<input id="thrPos-2" data-dojo-type="dijit/form/ComboBox" name="thrPos-2" value=""/>
+			catHand<input id="catHand-2" data-dojo-type="dijit/form/ComboBox" name="catHand-2" value=""/>
+			catPos<input id="catPos-2" data-dojo-type="dijit/form/ComboBox" name="catPos-2" value=""/>
+		</div>		
+	</form>
+	<br><br>
+	<b>The form as an object:</b>
+	<pre id="output"></pre>
+</body>
+
+</html>

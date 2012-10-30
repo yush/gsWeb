@@ -18,7 +18,23 @@ function(ready, domForm, dom, on, xhr){
 		}, function(err) {
 			console.info("Error:"+err);
 		});
-	};	
+	};
+	
+	function testCascade() {
+		xhr("gsSiteswap", {
+			handleAs: "text/html",
+			data: gridJson,
+			method: "POST",
+			headers : {
+        		"Content-Type" : "application/json"   			
+   			}
+		}).then(function(response){
+			console.info("reponse:"+response);
+			dom.byId("jlabApplet").innerHTML = response;
+		}, function(err) {
+			console.info("Error:"+err);
+		});		
+	}
 		
 	ready(function(){
 		var convertForm;

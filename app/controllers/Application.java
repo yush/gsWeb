@@ -7,6 +7,7 @@ import play.data.validation.Constraints.Required;
 import play.mvc.BodyParser;                     
 import play.libs.Json;
 
+
 import org.codehaus.jackson.*;
 import org.codehaus.jackson.map.*;
 import org.codehaus.jackson.node.*;
@@ -52,13 +53,7 @@ public class Application extends Controller {
   }  
   
   public static Result gsSiteswap() {
-
-   // String name = json.findPath("vnSiteswap").getTextValue();
-  //  if(name == null) {
-      return badRequest("Missing parameter vnSiteswap");
-  //  } else {
-  //  	return ok(gsSiteswap.render(name));
- //  }
+	  return TODO;
   }
   
   public static Result ssJson() {
@@ -67,6 +62,38 @@ public class Application extends Controller {
 	  
 	  trick.setSsName("Doe");
 	  return ok(Json.toJson(trick));
+  }
+  
+  public static Result testTricks() {
+	// cascade
+	String content = "{\"ssName\": \"cascade\",\"listMvmt\": [{\"ssBase\": \"3\",\"thrHand\": \"r\",\"thrPos\": \"c\",\"catHand\": \"l\",\"catPos\":\"l\"}, {\"ssBase\": \"3\",\"thrHand\": \"l\",\"thrPos\": \"c\",\"catHand\": \"r\",\"catPos\": \"r\"}]}";
+	JsonNode aJNode= Json.parse(content);
+	GSSiteswap aTrick = Json.fromJson(aJNode, GSSiteswap.class);
+	ObjectNode result = Json.newObject();
+	String calc = aTrick.asJlabHandNotation();
+	result.put("cascade: (0)(32).(0)(32). ", calc.equals("(0)(32).(0)(32).") +"="+ calc);
+
+	// cascade inversé
+	content = "{\"ssName\": \"cascade\",\"listMvmt\": [{\"ssBase\": \"3\",\"thrHand\": \"r\",\"thrPos\": \"r\",\"catHand\": \"l\",\"catPos\":\"c\"}, {\"ssBase\": \"3\",\"thrHand\": \"l\",\"thrPos\": \"l\",\"catHand\": \"r\",\"catPos\": \"c\"}]}";
+	aJNode= Json.parse(content);
+	aTrick = Json.fromJson(aJNode, GSSiteswap.class);
+	calc = aTrick.asJlabHandNotation();
+	result.put("cascade inverse: (32)(0).(32)(0). ", calc.equals("(32)(0).(32)(0).") +"="+ calc);
+	
+	// test half shower
+	content = "{\"ssName\": \"half shower\",\"listMvmt\": [{\"ssBase\": \"3\",\"thrHand\": \"r\",\"thrPos\": \"l\",\"catHand\": \"l\",\"catPos\": \"r\"}, {\"ssBase\": \"3\",\"thrHand\": \"l\",\"thrPos\": \"l\",\"catHand\": \"r\",\"catPos\": \"r\"}]}";
+	aJNode= Json.parse(content);
+	aTrick = Json.fromJson(aJNode, GSSiteswap.class);
+	calc = aTrick.asJlabHandNotation();	
+	result.put("half shower: (32)(0).(0)(32).", calc.equals("(32)(0).(0)(32).") +"="+ calc);
+	
+	// test windmill
+	content = "{\"ssName\": \"windmill\",\"listMvmt\": [{\"ssBase\": \"3\",\"thrHand\": \"r\",\"thrPos\": \"l\",\"catHand\": \"l\",\"catPos\": \"r\"}, {\"ssBase\": \"3\",\"thrHand\": \"l\",\"thrPos\": \"l\",\"catHand\": \"r\",\"catPos\": \"r\"}]}";
+	aJNode= Json.parse(content);
+	aTrick = Json.fromJson(aJNode, GSSiteswap.class);
+	calc = aTrick.asJlabHandNotation();	
+	result.put("windmill: (-32)(0).(32)(0).", calc.equals("(-32)(0).(32)(0).") +"="+ calc);
+	return ok(result); 
   }
   
 }
