@@ -1,20 +1,64 @@
 @(title: String)(content: Html)
 
 <!DOCTYPE html>
-
 <html>
-    <head>
-        <title>@title</title>        
-        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.8.0/dijit/themes/claro/claro.css">
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-        <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.8.0/dojo/dojo.js" data-dojo-config='async: true, parseOnLoad: false'></script>
-				<!--<script src="@routes.Assets.at("javascripts/dojo/dojo.js")" data-dojo-config='async: true, parseOnLoad: false'></script>-->
-				<script src="@routes.Assets.at("javascripts/gsWeb.js")"></script>				     
-    </head>
-    <body>
-        @content
-    </body>
+	<head>
+		<title>@title</title>
+		<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+		<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+		<!-- dojo -->
+		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.8.0/dijit/themes/claro/claro.css">
+		<!--<link rel="stylesheet" href="./public/stylesheets/main.css">-->
+		<script>
+			dojoConfig = {
+				async : true, // enables AMD loader
+				parseOnLoad : false
+			};
+
+		</script>
+		<script src="@routes.Assets.at("js/dojo/dojo.js")"></script>
+		<script src="@routes.Assets.at("js/dijit/dijit.js")"></script>
+	</head>
+	<body class="claro">
+		<script>
+			require(["dojo/dom", "dojo/on", "dojo/request", "dojo/parser", "dojo/json", "gsModule", "dijit/form/Button", "dijit/form/ComboBox", "dijit/form/Select", "dojo/domReady!"], 
+			   function(dom, on, request, parser, json, trick) {
+					
+				 parser.parse();
+
+				 trick.addCol();
+				 on(dom.byId("btnAddCol"), "click", function() {
+					 console.info("btnAddCol");
+					 trick.addCol();
+				 });
+				 
+				 on(dom.byId("convertFields"), "click", function() {
+					 strJson = trick.getSsToJson();
+					 dom.byId("output").innerHTML = strJson;
+					 obj = json.parse(strJson);
+					 if(obj == null) {
+					 		console.error("parsing incorrect");
+					 } else {
+							request("gsSiteswap", {
+								handleAs: "text/html",
+								data: strJson,
+								method: "POST",
+								headers : {
+					        		"Content-Type" : "application/json"   			
+					   			}
+							}).then(function(response){
+								console.info("reponse:"+response);
+								dom.byId("jlabApplet").innerHTML = response;
+							}, function(err) {
+								console.info("Error:"+err);
+							});					 
+					 	
+					 }
+				 });
+		});
+
+		</script>
+		<div id="jlabApplet"></div>
+		@content
+	</body>
 </html>

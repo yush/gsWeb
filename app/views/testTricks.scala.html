@@ -1,6 +1,20 @@
+
+@(tests: ArrayList[GSTest])
+
 @main("Saisie du siteswap généralisé")  {
 	<h2>Test tricks</h2>
-	<div class="claro">
-		
-	</div>
+	<table>
+		<tr>
+			<td>name</td>
+			<td>expected</td>
+			<td>found</td>
+		</tr>
+	@for( t <- tests ) {
+		<tr class="">
+			<td>@t.getName()</td>
+			<td>@t.getaTest()</td>
+			<td>@t.getaRes()</td>
+		</tr>
+	}
+	</table>
 }

@@ -37,9 +37,9 @@ function(ready, domForm, dom, on, xhr){
 	}
 		
 	ready(function(){
-		var convertForm;
+		parser.parse();
 		console.info("ready");
-		convertForm = dom.byId("convertForm");
-		on(convertForm, "click", gridToJson);
+		//convertForm = dom.byId("convertForm");
+		//on(convertForm, "click", gridToJson);
 	});
 });

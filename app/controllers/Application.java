@@ -13,7 +13,13 @@ import org.codehaus.jackson.map.*;
 import org.codehaus.jackson.node.*;
 
 import views.html.*;
+import models.GSMovement;
 import models.GSSiteswap;
+
+import models.GSTest;
+
+
+import java.util.ArrayList;
 
 public class Application extends Controller {
   
@@ -53,7 +59,13 @@ public class Application extends Controller {
   }  
   
   public static Result gsSiteswap() {
-	  return TODO;
+	//String 	content = "{\"ssName\": \"cascade\",\"listMvmt\": [{\"ssBase\": \"3\",\"thrHand\": \"r\",\"thrPos\": \"r\",\"catHand\": \"l\",\"catPos\":\"c\"}, {\"ssBase\": \"3\",\"thrHand\": \"l\",\"thrPos\": \"l\",\"catHand\": \"r\",\"catPos\": \"c\"}]}";
+//	JsonNode aJNode= Json.parse(content);
+	JsonNode aJNode= request().body().asJson();
+	GSSiteswap aTrick = Json.fromJson(aJNode, GSSiteswap.class);
+	ObjectNode result = Json.newObject();
+	String calc = aTrick.asJlabHandNotation();	  
+	return ok(gsSiteswap.render(calc));
   }
   
   public static Result ssJson() {
@@ -66,34 +78,49 @@ public class Application extends Controller {
   
   public static Result testTricks() {
 	// cascade
-	String content = "{\"ssName\": \"cascade\",\"listMvmt\": [{\"ssBase\": \"3\",\"thrHand\": \"r\",\"thrPos\": \"c\",\"catHand\": \"l\",\"catPos\":\"l\"}, {\"ssBase\": \"3\",\"thrHand\": \"l\",\"thrPos\": \"c\",\"catHand\": \"r\",\"catPos\": \"r\"}]}";
+	ArrayList<GSTest> tests = new ArrayList<GSTest>();
+	GSTest aTest;
+	String 	content = "{\"ssName\": \"half shower\",\"listMvmt\": [{\"ssBase\": \"3\",\"thrHand\": \"r\",\"thrPos\": \"l\",\"catHand\": \"l\",\"catPos\": \"r\"}, {\"ssBase\": \"3\",\"thrHand\": \"l\",\"thrPos\": \"l\",\"catHand\": \"r\",\"catPos\": \"r\"}]}";
 	JsonNode aJNode= Json.parse(content);
 	GSSiteswap aTrick = Json.fromJson(aJNode, GSSiteswap.class);
 	ObjectNode result = Json.newObject();
-	String calc = aTrick.asJlabHandNotation();
-	result.put("cascade: (0)(32).(0)(32). ", calc.equals("(0)(32).(0)(32).") +"="+ calc);
-
+	aTest = new GSTest();
+	aTest.setName("cascade");
+	aTest.setaTest("(0)(32).(0)(32).");
+	aTest.setaRes(aTrick.asJlabHandNotation());
+	tests.add(aTest);
+	
 	// cascade inversé
 	content = "{\"ssName\": \"cascade\",\"listMvmt\": [{\"ssBase\": \"3\",\"thrHand\": \"r\",\"thrPos\": \"r\",\"catHand\": \"l\",\"catPos\":\"c\"}, {\"ssBase\": \"3\",\"thrHand\": \"l\",\"thrPos\": \"l\",\"catHand\": \"r\",\"catPos\": \"c\"}]}";
 	aJNode= Json.parse(content);
 	aTrick = Json.fromJson(aJNode, GSSiteswap.class);
-	calc = aTrick.asJlabHandNotation();
-	result.put("cascade inverse: (32)(0).(32)(0). ", calc.equals("(32)(0).(32)(0).") +"="+ calc);
+	aTest = new GSTest();
+	aTest.setName("cascade inverse");
+	aTest.setaTest("(32)(0).(32)(0).");
+	aTest.setaRes(aTrick.asJlabHandNotation());
+	tests.add(aTest);
 	
 	// test half shower
 	content = "{\"ssName\": \"half shower\",\"listMvmt\": [{\"ssBase\": \"3\",\"thrHand\": \"r\",\"thrPos\": \"l\",\"catHand\": \"l\",\"catPos\": \"r\"}, {\"ssBase\": \"3\",\"thrHand\": \"l\",\"thrPos\": \"l\",\"catHand\": \"r\",\"catPos\": \"r\"}]}";
 	aJNode= Json.parse(content);
 	aTrick = Json.fromJson(aJNode, GSSiteswap.class);
-	calc = aTrick.asJlabHandNotation();	
-	result.put("half shower: (32)(0).(0)(32).", calc.equals("(32)(0).(0)(32).") +"="+ calc);
+	aTest = new GSTest();
+	aTest.setName("half shower");
+	aTest.setaTest("(32)(0).(0)(32).");
+	aTest.setaRes(aTrick.asJlabHandNotation());
+	tests.add(aTest);
 	
 	// test windmill
 	content = "{\"ssName\": \"windmill\",\"listMvmt\": [{\"ssBase\": \"3\",\"thrHand\": \"r\",\"thrPos\": \"l\",\"catHand\": \"l\",\"catPos\": \"r\"}, {\"ssBase\": \"3\",\"thrHand\": \"l\",\"thrPos\": \"l\",\"catHand\": \"r\",\"catPos\": \"r\"}]}";
 	aJNode= Json.parse(content);
 	aTrick = Json.fromJson(aJNode, GSSiteswap.class);
-	calc = aTrick.asJlabHandNotation();	
-	result.put("windmill: (-32)(0).(32)(0).", calc.equals("(-32)(0).(32)(0).") +"="+ calc);
-	return ok(result); 
+	aTest = new GSTest();
+	aTest.setName("windmill");
+	aTest.setaTest("(-32)(0).(32)(0).");
+	aTest.setaRes(aTrick.asJlabHandNotation());
+	tests.add(aTest);
+
+	return ok(testTricks.render(tests)); 
   }
   
 }
