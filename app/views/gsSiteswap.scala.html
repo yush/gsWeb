@@ -1,11 +1,11 @@
-@(vnSiteswap: String)
+@(vnSiteswap: String, handsParam: String)
 
 
-    <applet archive="/jugglinglab.jar" code="JugglingLab" width="600" height="500">
+    <applet archive="@routes.Assets.at("js/JugglingLab.jar")" code="JugglingLab" width="600" height="500">
     <param name="config" value="entry=none;view=edit">
     <param name="notation" value="siteswap">
-    <param name="pattern" value="3">
-    <param name="hands" value="@vnSiteswap">
+    <param name="pattern" value="@vnSiteswap">
+    <param name="hands" value="@handsParam">
     
     </applet>
 		    

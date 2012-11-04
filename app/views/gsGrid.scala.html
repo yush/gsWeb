@@ -1,28 +1,79 @@
 @main("Saisie du siteswap généralisé") {
-	<h2>Grille de saisie</h2>
-	<div class="claro">
-	<div id="jlabApplet">
-	    <applet archive="/assets/javascripts/JugglingLab.jar" code="JugglingLab" width="600" height="500">
-	    <param name="config" value="entry=none;view=edit">
-	    <param name="notation" value="siteswap">
-	    <param name="pattern" value="3">
-	    </applet>		
-	</div>
+
+		<script>
+			require(["dojo/dom", "dojo/on", "dojo/request", "dojo/parser", "dojo/json", "gsModule", "dijit/form/Button", "dijit/form/ComboBox", "dijit/form/Select", "dojo/domReady!"], 
+			   function(dom, on, request, parser, json, trick) {
+					
+				 parser.parse();
+
+				 trick.addCol();
+				 on(dom.byId("btnAddCol"), "click", function() {
+					 console.info("btnAddCol");
+					 trick.addCol();
+				 });
+				 
+				 on(dom.byId("convertFields"), "click", function() {
+					 strJson = trick.getSsToJson();
+					 dom.byId("output").innerHTML = strJson;
+					 obj = json.parse(strJson);
+					 if(obj == null) {
+					 		console.error("parsing incorrect");
+					 } else {
+					 		trick.toJLab();
+					 }
+				 });
+							 
+						
+		});
+
+		</script>	
+		
 	
-	<button id="convertForm">Juggle it</button><br><br>
-	<form id="gridForm">
-	   <input type="text" name="vnSiteswap" value="value1">
-	</form>
-	<form>
-		<input type='text' name"ssBase"/>
-		<input type='text' name"thrHand"/>
-		<input type='text' name"catHand"/>
-		<input type='text' name"thrPosition"/>
-		<input type='text' name"catPosition"/>
-	</form>
-	<br><br>
-	<b>The form as JSON:</b>
-	<pre id="output"></pre>
-	
-	</div>
+		<div data-dojo-type="dojo/store/Memory"
+		data-dojo-id="ssStore"
+		data-dojo-props="data: [{id: '0', label:'0', name: '0'},
+		{id: '1', label:'0',name: '1'},
+		{id: '2', label:'0',name: '2'},
+		{id: '3', label:'0',name: '3'},
+		{id: '4', label:'0',name: '4'},
+		{id: '5', label:'0',name: '5'}]"></div>
+		<div data-dojo-type="dojo/store/Memory"
+		data-dojo-id="handStore"
+		data-dojo-props="data: [{id: 'L', name: 'left'}, {id: 'R', name: 'right'}]"></div>
+		<div data-dojo-type="dojo/store/Memory"
+		data-dojo-id="posStore"
+		data-dojo-props="data: [{id: 'l', name: 'left'}, {id: 'c', name: 'center'}, {id: 'r', name: 'right'}]"></div>
+		<button data-dojo-type="dijit/form/Button" id="convertFields">
+			Play
+		</button>
+		<button data-dojo-type="dijit/form/Button" id="btnAddCol">
+			Add ss
+		</button>
+		<table id="grid">
+			<tr>
+				<td>ssName</td>
+				<td>
+				<input id="ssName" name="ssName" data-dojo-type="dijit/form/TextBox" value="" />
+				</td>
+			</tr>
+			<tr id="ssBase">
+				<td>ssBase</td>
+			</tr>
+			<tr id="thrHand">
+				<td>thrHand</td>
+			</tr>
+			<tr id="thrPos">
+				<td>thrPos</td>
+			</tr>
+			<tr id="catHand">
+				<td>catHand</td>
+			</tr>
+			<tr id="catPos">
+				<td>catPos</td>
+			</tr>
+			</form>
+			<br>
+			<b>Trick</b>
+			<pre id="output"></pre>
+	</body> 
 }

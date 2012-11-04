@@ -26,28 +26,6 @@ public class Application extends Controller {
   public static class Siteswap {
 	  @Required public String ssName;
   }
-	
-  public static Result index() {
-    return ok(index.render("Your new application is ready."));
-  }
-  
-  public static Result juggle() {
-	  return ok(juggle.render());
-  }
-  
-  public static Result basicForm() {
-	  Form<Siteswap> siteswapForm = form(Siteswap.class); 
-	  return ok(basicForm.render(siteswapForm));
-  }
-  
-  public static Result responseBasicForm() {
-	  Form<Siteswap> siteswapForm = form(Siteswap.class).bindFromRequest();
-	  if ( !siteswapForm.hasErrors()) {
-		  return ok(responseBasicForm.render(siteswapForm));
-	  } else {
-		  return badRequest(basicForm.render(siteswapForm));
-	  }
-  }
   
   public static Result gsGrid() {
 	  ObjectMapper mapper = new ObjectMapper();
@@ -59,13 +37,10 @@ public class Application extends Controller {
   }  
   
   public static Result gsSiteswap() {
-	//String 	content = "{\"ssName\": \"cascade\",\"listMvmt\": [{\"ssBase\": \"3\",\"thrHand\": \"r\",\"thrPos\": \"r\",\"catHand\": \"l\",\"catPos\":\"c\"}, {\"ssBase\": \"3\",\"thrHand\": \"l\",\"thrPos\": \"l\",\"catHand\": \"r\",\"catPos\": \"c\"}]}";
-//	JsonNode aJNode= Json.parse(content);
 	JsonNode aJNode= request().body().asJson();
 	GSSiteswap aTrick = Json.fromJson(aJNode, GSSiteswap.class);
 	ObjectNode result = Json.newObject();
-	String calc = aTrick.asJlabHandNotation();	  
-	return ok(gsSiteswap.render(calc));
+	return ok(gsSiteswap.render( aTrick.asVanillaSiteswap() , aTrick.asJlabHandNotation()));
   }
   
   public static Result ssJson() {
@@ -76,18 +51,24 @@ public class Application extends Controller {
 	  return ok(Json.toJson(trick));
   }
   
+  public static Result juggleTest() {
+	  JsonNode json = request().body().asJson();
+	  return ok(gsSiteswap.render(json.findPath("ss").getTextValue(), json.findPath("hands").getTextValue()));
+  }
+  
   public static Result testTricks() {
 	// cascade
 	ArrayList<GSTest> tests = new ArrayList<GSTest>();
 	GSTest aTest;
-	String 	content = "{\"ssName\": \"half shower\",\"listMvmt\": [{\"ssBase\": \"3\",\"thrHand\": \"r\",\"thrPos\": \"l\",\"catHand\": \"l\",\"catPos\": \"r\"}, {\"ssBase\": \"3\",\"thrHand\": \"l\",\"thrPos\": \"l\",\"catHand\": \"r\",\"catPos\": \"r\"}]}";
+	String 	content = "{\"ssName\": \"cascade\",\"listMvmt\": [{\"ssBase\": \"3\",\"thrHand\": \"r\",\"thrPos\": \"l\",\"catHand\": \"l\",\"catPos\": \"r\"}, {\"ssBase\": \"3\",\"thrHand\": \"l\",\"thrPos\": \"l\",\"catHand\": \"r\",\"catPos\": \"r\"}]}";
 	JsonNode aJNode= Json.parse(content);
 	GSSiteswap aTrick = Json.fromJson(aJNode, GSSiteswap.class);
 	ObjectNode result = Json.newObject();
 	aTest = new GSTest();
 	aTest.setName("cascade");
-	aTest.setaTest("(0)(32).(0)(32).");
-	aTest.setaRes(aTrick.asJlabHandNotation());
+	aTest.setExpVnSs("3");
+	aTest.setExpHands("(0)(32).(0)(32).");
+	aTest.setaSs(aTrick);
 	tests.add(aTest);
 	
 	// cascade inversé
@@ -96,8 +77,9 @@ public class Application extends Controller {
 	aTrick = Json.fromJson(aJNode, GSSiteswap.class);
 	aTest = new GSTest();
 	aTest.setName("cascade inverse");
-	aTest.setaTest("(32)(0).(32)(0).");
-	aTest.setaRes(aTrick.asJlabHandNotation());
+	aTest.setExpVnSs("3");
+	aTest.setExpHands("(32)(0).(32)(0).");
+	aTest.setaSs(aTrick);
 	tests.add(aTest);
 	
 	// test half shower
@@ -106,8 +88,9 @@ public class Application extends Controller {
 	aTrick = Json.fromJson(aJNode, GSSiteswap.class);
 	aTest = new GSTest();
 	aTest.setName("half shower");
-	aTest.setaTest("(32)(0).(0)(32).");
-	aTest.setaRes(aTrick.asJlabHandNotation());
+	aTest.setExpVnSs("3");
+	aTest.setExpHands("(32)(0).(0)(32).");
+	aTest.setaSs(aTrick);
 	tests.add(aTest);
 	
 	// test windmill
@@ -116,8 +99,9 @@ public class Application extends Controller {
 	aTrick = Json.fromJson(aJNode, GSSiteswap.class);
 	aTest = new GSTest();
 	aTest.setName("windmill");
-	aTest.setaTest("(-32)(0).(32)(0).");
-	aTest.setaRes(aTrick.asJlabHandNotation());
+	aTest.setExpVnSs("3");
+	aTest.setExpHands("(-32)(0).(32)(0).");
+	aTest.setaSs(aTrick);
 	tests.add(aTest);
 
 	return ok(testTricks.render(tests)); 

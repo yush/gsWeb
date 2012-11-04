@@ -1,20 +1,66 @@
-
 @(tests: ArrayList[GSTest])
 
 @main("Saisie du siteswap généralisé")  {
-	<h2>Test tricks</h2>
-	<table>
-		<tr>
-			<td>name</td>
-			<td>expected</td>
-			<td>found</td>
-		</tr>
+<script>
+	require(["dojo/query", "dojo/dom", "dojo/on", "dojo/request", "dojo/parser", "dojo/json", "gsModule", "dojo/_base/array", "dojo/NodeList-manipulate", "dojo/domReady!"], function(query, dom, on, request, parser, json, trick, arr, manip) {
+		console.info("hello");
+		var list = query(".test");
+
+		arr.forEach(list, function(aNode) {
+			var listTest = query("td", aNode);
+			console.info(listTest);
+
+			listTest.at(1).on("click", function() {
+				listParams = query("td", aNode);
+				expSsBase = listParams.at(2).innerHTML();
+				expHands = listParams.at(3).innerHTML();
+				console.info(expSsBase + ' ' + expHands);
+				var params = { ss: expSsBase, hands: expHands};
+				console.info(json.stringify(params));
+				request("juggleTest", {
+					handleAs : "text/html",
+					data : json.stringify(params),
+					method : "POST",
+					headers : {
+						"Content-Type" : "application/json"
+					}
+				}).then(function(response) {
+					console.info("reponse:" + response);
+					dom.byId("jlabApplet").innerHTML = response;
+				}, function(err) {
+					console.info("Error:" + err);
+				});
+			});
+		});
+	});
+
+</script>
+<h2>Test tricks</h2>
+<table>
+	<tr>
+		<td>name</td>
+		<td>Ss expected</td>
+		<td>hands expected</td>
+		<td>Ss found</td>
+		<td>Hands found</td>
+	</tr>
 	@for( t <- tests ) {
-		<tr class="">
-			<td>@t.getName()</td>
-			<td>@t.getaTest()</td>
-			<td>@t.getaRes()</td>
-		</tr>
+	<tr class="test">
+		<td>@t.getName()</td>
+		<td>
+		<button class="exp">
+			play
+		</button></td>
+		<td>@t.getExpVnSs()</td>
+		<td>@t.getExpHands()</td>
+		<td>
+		<button class="res">
+			play
+		</button></td>
+		<td>@t.getaSs().asVanillaSiteswap()</td>
+		<td>@t.getaSs().asJlabHandNotation()</td>
+		<td></td>
+	</tr>
 	}
-	</table>
-}
+</table>
+} 

@@ -49,4 +49,13 @@ public class GSSiteswap {
 		return str.toString();
 	}	
 	
+	public String asVanillaSiteswap() {
+		StringBuilder str = new StringBuilder();
+		GSMovement nextMvmt;
+		for (GSMovement aMvmt  : _listMvmt) {
+			str = str.append(aMvmt.getSsBase());
+		} 
+		return str.toString();		
+	}
+	
 }

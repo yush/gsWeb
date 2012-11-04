@@ -20,44 +20,6 @@
 		<script src="@routes.Assets.at("js/dijit/dijit.js")"></script>
 	</head>
 	<body class="claro">
-		<script>
-			require(["dojo/dom", "dojo/on", "dojo/request", "dojo/parser", "dojo/json", "gsModule", "dijit/form/Button", "dijit/form/ComboBox", "dijit/form/Select", "dojo/domReady!"], 
-			   function(dom, on, request, parser, json, trick) {
-					
-				 parser.parse();
-
-				 trick.addCol();
-				 on(dom.byId("btnAddCol"), "click", function() {
-					 console.info("btnAddCol");
-					 trick.addCol();
-				 });
-				 
-				 on(dom.byId("convertFields"), "click", function() {
-					 strJson = trick.getSsToJson();
-					 dom.byId("output").innerHTML = strJson;
-					 obj = json.parse(strJson);
-					 if(obj == null) {
-					 		console.error("parsing incorrect");
-					 } else {
-							request("gsSiteswap", {
-								handleAs: "text/html",
-								data: strJson,
-								method: "POST",
-								headers : {
-					        		"Content-Type" : "application/json"   			
-					   			}
-							}).then(function(response){
-								console.info("reponse:"+response);
-								dom.byId("jlabApplet").innerHTML = response;
-							}, function(err) {
-								console.info("Error:"+err);
-							});					 
-					 	
-					 }
-				 });
-		});
-
-		</script>
 		<div id="jlabApplet"></div>
 		@content
 	</body>
