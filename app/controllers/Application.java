@@ -28,7 +28,6 @@ public class Application extends Controller {
   }
   
   public static Result gsGrid() {
-	  ObjectMapper mapper = new ObjectMapper();
 	  return ok(gsGrid.render());
   }
   
@@ -56,6 +55,10 @@ public class Application extends Controller {
 	  return ok(gsSiteswap.render(json.findPath("ss").getTextValue(), json.findPath("hands").getTextValue()));
   }
   
+  public static Result juggleDemo() {
+	  return ok(juggleDemo.render());
+  }
+  
   public static Result testTricks() {
 	// cascade
 	ArrayList<GSTest> tests = new ArrayList<GSTest>();
@@ -72,7 +75,7 @@ public class Application extends Controller {
 	tests.add(aTest);
 	
 	// cascade inversé
-	content = "{\"ssName\": \"cascade\",\"listMvmt\": [{\"ssBase\": \"3\",\"thrHand\": \"r\",\"thrPos\": \"r\",\"catHand\": \"l\",\"catPos\":\"c\"}, {\"ssBase\": \"3\",\"thrHand\": \"l\",\"thrPos\": \"l\",\"catHand\": \"r\",\"catPos\": \"c\"}]}";
+	content = "{\"ssName\": \"cascade inverse\",\"listMvmt\": [{\"ssBase\": \"3\",\"thrHand\": \"r\",\"thrPos\": \"r\",\"catHand\": \"l\",\"catPos\":\"c\"}, {\"ssBase\": \"3\",\"thrHand\": \"l\",\"thrPos\": \"l\",\"catHand\": \"r\",\"catPos\": \"c\"}]}";
 	aJNode= Json.parse(content);
 	aTrick = Json.fromJson(aJNode, GSSiteswap.class);
 	aTest = new GSTest();
@@ -104,6 +107,17 @@ public class Application extends Controller {
 	aTest.setaSs(aTrick);
 	tests.add(aTest);
 
+	// test 4b
+	content = "{\"ssName\": \"4b\",\"listMvmt\": [{\"ssBase\": \"4\",\"thrHand\": \"r\",\"thrPos\": \"l\",\"catHand\": \"l\",\"catPos\": \"r\"}, {\"ssBase\": \"4\",\"thrHand\": \"l\",\"thrPos\": \"l\",\"catHand\": \"r\",\"catPos\": \"r\"}]}";
+	aJNode= Json.parse(content);
+	aTrick = Json.fromJson(aJNode, GSSiteswap.class);
+	aTest = new GSTest();
+	aTest.setName("4b");
+	aTest.setExpVnSs("4");
+	aTest.setExpHands("(-32)(0).(32)(0).");
+	aTest.setaSs(aTrick);
+	tests.add(aTest);
+	
 	return ok(testTricks.render(tests)); 
   }
   

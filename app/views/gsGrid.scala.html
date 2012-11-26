@@ -19,7 +19,7 @@
 					 if(obj == null) {
 					 		console.error("parsing incorrect");
 					 } else {
-					 		trick.toJLab();
+					 		trick.toJLab(obj);
 					 }
 				 });
 							 
@@ -39,10 +39,10 @@
 		{id: '5', label:'0',name: '5'}]"></div>
 		<div data-dojo-type="dojo/store/Memory"
 		data-dojo-id="handStore"
-		data-dojo-props="data: [{id: 'L', name: 'left'}, {id: 'R', name: 'right'}]"></div>
+		data-dojo-props="data: [{id: 'L', name: 'L'}, {id: 'R', name: 'R'}]"></div>
 		<div data-dojo-type="dojo/store/Memory"
 		data-dojo-id="posStore"
-		data-dojo-props="data: [{id: 'l', name: 'left'}, {id: 'c', name: 'center'}, {id: 'r', name: 'right'}]"></div>
+		data-dojo-props="data: [{id: 'l', name: 'l'}, {id: 'c', name: 'c'}, {id: 'r', name: 'r'}]"></div>
 		<button data-dojo-type="dijit/form/Button" id="convertFields">
 			Play
 		</button>

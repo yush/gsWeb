@@ -2,18 +2,12 @@
 
 @main("Saisie du siteswap généralisé")  {
 <script>
+
 	require(["dojo/query", "dojo/dom", "dojo/on", "dojo/request", "dojo/parser", "dojo/json", "gsModule", "dojo/_base/array", "dojo/NodeList-manipulate", "dojo/domReady!"], function(query, dom, on, request, parser, json, trick, arr, manip) {
-		console.info("hello");
-		var list = query(".test");
-
-		arr.forEach(list, function(aNode) {
-			var listTest = query("td", aNode);
-			console.info(listTest);
-
-			listTest.at(1).on("click", function() {
-				listParams = query("td", aNode);
-				expSsBase = listParams.at(2).innerHTML();
-				expHands = listParams.at(3).innerHTML();
+		testClick = function( buttonDomNode ,ssBase, ssHands) {
+			buttonDomNode.on("click", function() {
+				expSsBase = ssBase;
+				expHands = ssHands;
 				console.info(expSsBase + ' ' + expHands);
 				var params = { ss: expSsBase, hands: expHands};
 				console.info(json.stringify(params));
@@ -30,7 +24,18 @@
 				}, function(err) {
 					console.info("Error:" + err);
 				});
+				
 			});
+		}
+		
+		// on recup l'ensemble des lignes decrivant les parametres attendus et obtenus
+		// puis on affecte au bouton les parametres
+		var list = query(".test");
+		arr.forEach(list, function(aNode) {
+			var listTest = query("td", aNode);
+			console.info(listTest);
+			this.testClick(listTest.at(1), listTest.at(2).innerHTML(), listTest.at(3).innerHTML());
+			this.testClick(listTest.at(4), listTest.at(5).innerHTML(), listTest.at(6).innerHTML());
 		});
 	});
 
@@ -63,4 +68,5 @@
 	</tr>
 	}
 </table>
+
 } 
