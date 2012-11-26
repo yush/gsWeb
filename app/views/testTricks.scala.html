@@ -1,15 +1,17 @@
-@(tests: ArrayList[GSTest])
+@(tests: java.util.ArrayList[GSTest])
 
 @main("Saisie du siteswap généralisé")  {
 <script>
-
 	require(["dojo/query", "dojo/dom", "dojo/on", "dojo/request", "dojo/parser", "dojo/json", "gsModule", "dojo/_base/array", "dojo/NodeList-manipulate", "dojo/domReady!"], function(query, dom, on, request, parser, json, trick, arr, manip) {
-		testClick = function( buttonDomNode ,ssBase, ssHands) {
+		testClick = function(buttonDomNode, ssBase, ssHands) {
 			buttonDomNode.on("click", function() {
 				expSsBase = ssBase;
 				expHands = ssHands;
 				console.info(expSsBase + ' ' + expHands);
-				var params = { ss: expSsBase, hands: expHands};
+				var params = {
+					ss : expSsBase,
+					hands : expHands
+				};
 				console.info(json.stringify(params));
 				request("juggleTest", {
 					handleAs : "text/html",
@@ -24,10 +26,8 @@
 				}, function(err) {
 					console.info("Error:" + err);
 				});
-				
 			});
 		}
-		
 		// on recup l'ensemble des lignes decrivant les parametres attendus et obtenus
 		// puis on affecte au bouton les parametres
 		var list = query(".test");
@@ -49,24 +49,25 @@
 		<td>Ss found</td>
 		<td>Hands found</td>
 	</tr>
-	@for( t <- tests ) {
-	<tr class="test">
-		<td>@t.getName()</td>
-		<td>
-		<button class="exp">
-			play
-		</button></td>
-		<td>@t.getExpVnSs()</td>
-		<td>@t.getExpHands()</td>
-		<td>
-		<button class="res">
-			play
-		</button></td>
-		<td>@t.getaSs().asVanillaSiteswap()</td>
-		<td>@t.getaSs().asJlabHandNotation()</td>
-		<td></td>
-	</tr>
-	}
-</table>
 
+		@for( t <- tests ) {
+		<tr class="test">
+			<td>@t.getName()</td>
+			<td>
+			<button class="exp">
+				play
+			</button></td>
+			<td>@t.getExpVnSs()</td>
+			<td>@t.getExpHands()</td>
+			<td>
+			<button class="res">
+				play
+			</button></td>
+			<td>@t.getaSs().asVanillaSiteswap()</td>
+			<td>@t.getaSs().asJlabHandNotation()</td>
+			<td></td>
+		</tr>
+		}
+
+</table>
 } 

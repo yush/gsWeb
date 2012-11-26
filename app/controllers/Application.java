@@ -58,7 +58,7 @@ public class Application extends Controller {
   public static Result juggleDemo() {
 	  return ok(juggleDemo.render());
   }
-  
+ 
   public static Result testTricks() {
 	// cascade
 	ArrayList<GSTest> tests = new ArrayList<GSTest>();
