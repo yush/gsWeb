@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/dojo/1.8.0/dijit/themes/claro/claro.css">
-		<link rel="stylesheet" href="./public/stylesheets/main.css">
+		<link rel="stylesheet" href="http://thesociable.github.com/dbootstrap/dbootstrap/theme/dbootstrap.css">	
+		<link rel="stylesheet" href="http://thesociable.github.com/dbootstrap/dijit/themes/dijit.css">
+		<link rel='stylesheet' type='text/css' href='http://thesociable.github.com/dbootstrap/dbootstrap/theme/dbootstrap.css'>
+		<!--
+		<script data-dojo-config='async: 1, tlmSiblingOfDojo: 0, deps:["dbootstrap/entry_point"]' type='text/javascript' src 'http://thesociable.github.com/dbootstrap/dojo/dojo.js' defer> </script> 
+		-->
+		<script type='text/javascript' src='http://thesociable.github.com/dbootstrap/dbootstrap/entry_point.js' defer> </script>
 		<script>
 			dojoConfig = {
 				async : true, // enables AMD loader
-				parseOnLoad : true
+				tlmSiblingOfDojo: 0,
+				deps:["dbootstrap/entry_point"],
+				parseOnLoad : false
 			};
 
 		</script>
-		<script src="public/js/dojo/dojo.js"></script>
-		<script src="public/js/dijit/dijit.js"></script>
 		<script>
-			require(["dojo/dom", "dojo/on", "dojo/request", "dojo/parser", "dojo/json", "gsModule", "dijit/form/Button", "dijit/form/ComboBox", "dijit/form/Select", "dojo/domReady!"], function(dom, on, parser, json, trick) {
+			require(["dojo/dom", "dojo/on", "dojo/request", "dojo/parser", "dojo/json", "gsModule", "dijit/form/Button", "dijit/form/ComboBox", "dijit/form/Select", "dojo/domReady!"], function(dom, on, request, parser, json, trick) {
+			
 				parser.parse();
 				trick.addCol();
 				on(dom.byId("btnAddCol"), "click", function() {
@@ -36,11 +42,13 @@
 						console.log("An error occurred: " + error);
 					});
 				});
-			});
+				
+			});		
+		
 
 		</script>
 	</head>
-	<body class="claro">
+	<body class="bootstrap">
 		<div data-dojo-type="dojo/store/Memory"
 		data-dojo-id="ssStore"
 		data-dojo-props="data: [{id: '0', label:'0', name: '0'},
