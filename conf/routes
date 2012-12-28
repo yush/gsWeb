@@ -2,6 +2,10 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+#=========================
+# GSWEB
+#=========================
+
 # Home page
 GET		/							controllers.Application.gsGrid()
 
@@ -14,6 +18,27 @@ GET		/gsGrid							controllers.Application.gsGrid()
 GET		/ssJson							controllers.Application.ssJson()
 GET		/testTricks						controllers.Application.testTricks()
 GET		/juggleDemo						controllers.Application.juggleDemo()
+
+#=========================
+# BLOG
+#=========================
+
+# Home page
+GET     /blog                           controllers.blog.Blog.index()
+GET		/blog/posts						controllers.blog.Blog.index()
+GET		/blog/post/:id					controllers.blog.Blog.show(id: Long)
+
+# login and logout
+GET		/blog/login						controllers.blog.Blog.log()
+POST	/blog/login						controllers.blog.Blog.authenticate()
+GET		/blog/logout						controllers.blog.Blog.logout()
+
+#admin
+GET		/blog/admin						controllers.blog.Admin.index()
+GET		/blog/new						controllers.blog.Admin.newPost()
+POST	/blog/submitPost					controllers.blog.Admin.submitNewPost()
+GET		/blog/update/:id					controllers.blog.Admin.updatePost(id: Long)
+POST	/blog/update/:id					controllers.blog.Admin.submitUpdatePost(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET   /assets/*file               controllers.Assets.at(path="/public", file)
