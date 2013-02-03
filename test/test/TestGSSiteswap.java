@@ -70,17 +70,17 @@ public class TestGSSiteswap {
 		GSSiteswap aTrick = new GSSiteswap();
 		aMove = aTrick.newMovement();
 		aMove.setSsBase("3");
-		aMove.setThrHand("R");
-		aMove.setThrPos("r");
-		aMove.setCatHand("L");
-		aMove.setCatPos("c");
+		aMove.setThrHand(Constantes.RIGHT_HAND);
+		aMove.setThrPos(Constantes.R_POS);
+		aMove.setCatHand(Constantes.LEFT_HAND);
+		aMove.setCatPos(Constantes.C_POS);
 		
 		aMove = aTrick.newMovement();
 		aMove.setSsBase("3");
-		aMove.setThrHand("L");
-		aMove.setThrPos("l");
-		aMove.setCatHand("R");
-		aMove.setCatPos("c");
+		aMove.setThrHand(Constantes.LEFT_HAND);
+		aMove.setThrPos(Constantes.L_POS);
+		aMove.setCatHand(Constantes.RIGHT_HAND);
+		aMove.setCatPos(Constantes.C_POS);
 		assertEquals("Cascade inverse", "(32)(0).(32)(0).", aTrick.asJlabHandNotation());	
 	}
 	
