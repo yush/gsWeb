@@ -1,5 +1,6 @@
 package models;
 
+
 public class GSMovement {
 	private String _ssBase;
 	private String _thrHand; 
@@ -36,12 +37,20 @@ public class GSMovement {
 	public String asCatHandNotation() {
 		String catStr;
 		catStr = valueForPos(_catPos);
+		if ((_catHand.equals("L") && _catPos.equals("r")) ||
+			(_catHand.equals("R") && _catPos.equals("l"))) {
+			catStr = new String("-"+catStr.toString());
+		}
 		return "("+catStr+")";
 	}
 
 	public String asThrHandNotation() {
 		String thrStr;
 		thrStr = valueForPos(_thrPos);
+		if ((_thrHand.equals("R") && _thrPos.equals("l")) || 
+			(_thrHand.equals("L") && _thrPos.equals("r"))) {
+			thrStr = new String("-"+thrStr.toString());
+		}			
 		return "("+thrStr+")";
 	}
 	

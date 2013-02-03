@@ -1,7 +1,7 @@
 <classpath>
   <classpathentry output=".target" path="app" kind="src"></classpathentry>
   <classpathentry output=".target" path="test" kind="src"></classpathentry>
-  <classpathentry kind="con" path="org.scala-ide.sdt.launching.SCALA_CONTAINER"></classpathentry>
+  <classpathentry path="C:\Users\clem\Dropbox\common\code\gsWeb\target\scala-2.10\classes_managed" kind="lib"></classpathentry>
   <classpathentry path="C:\Users\clem\code\play-2.0\repository\local\play\play_2.10\2.1-RC1\jars\play_2.10.jar" kind="lib"></classpathentry>
   <classpathentry path="C:\Users\clem\code\play-2.0\repository\local\play\sbt-link\2.1-RC1\jars\sbt-link.jar" kind="lib"></classpathentry>
   <classpathentry path="C:\Users\clem\code\play-2.0\repository\local\org.javassist\javassist\3.16.1-GA\jars\javassist.jar" kind="lib"></classpathentry>
@@ -60,6 +60,13 @@
   <classpathentry path="C:\Users\clem\code\play-2.0\repository\local\org.avaje.ebeanorm\avaje-ebeanorm-agent\3.1.1\jars\avaje-ebeanorm-agent.jar" kind="lib"></classpathentry>
   <classpathentry path="C:\Users\clem\code\play-2.0\repository\local\org.avaje.ebeanorm\avaje-ebeanorm-server\3.1.2\jars\avaje-ebeanorm-server.jar" kind="lib"></classpathentry>
   <classpathentry path="C:\Users\clem\code\play-2.0\repository\local\org.hibernate.javax.persistence\hibernate-jpa-2.0-api\1.0.1.Final\jars\hibernate-jpa-2.0-api.jar" kind="lib"></classpathentry>
+  <classpathentry path="C:\Users\clem\code\play-2.0\repository\local\org.pegdown\pegdown\1.1.0\jars\pegdown.jar" kind="lib"></classpathentry>
+  <classpathentry path="C:\Users\clem\code\play-2.0\repository\local\org.parboiled\parboiled-core\1.0.2\jars\parboiled-core.jar" kind="lib"></classpathentry>
+  <classpathentry path="C:\Users\clem\code\play-2.0\repository\local\org.parboiled\parboiled-java\1.0.2\jars\parboiled-java.jar" kind="lib"></classpathentry>
+  <classpathentry path="C:\Users\clem\code\play-2.0\repository\local\asm\asm\3.3.1\jars\asm.jar" kind="lib"></classpathentry>
+  <classpathentry path="C:\Users\clem\code\play-2.0\repository\local\asm\asm-util\3.3.1\jars\asm-util.jar" kind="lib"></classpathentry>
+  <classpathentry path="C:\Users\clem\code\play-2.0\repository\local\asm\asm-tree\3.3.1\jars\asm-tree.jar" kind="lib"></classpathentry>
+  <classpathentry path="C:\Users\clem\code\play-2.0\repository\local\asm\asm-analysis\3.3.1\jars\asm-analysis.jar" kind="lib"></classpathentry>
   <classpathentry path="C:\Users\clem\code\play-2.0\repository\local\play\play-test_2.10\2.1-RC1\jars\play-test_2.10.jar" kind="lib"></classpathentry>
   <classpathentry path="C:\Users\clem\code\play-2.0\repository\local\junit\junit-dep\4.10\jars\junit-dep.jar" kind="lib"></classpathentry>
   <classpathentry path="C:\Users\clem\code\play-2.0\repository\local\org.hamcrest\hamcrest-core\1.1\jars\hamcrest-core.jar" kind="lib"></classpathentry>
@@ -107,5 +114,5 @@
   <classpathentry path="C:\Users\clem\code\play-2.0\repository\local\org.easytesting\fest-util\1.1.6\jars\fest-util.jar" kind="lib"></classpathentry>
   <classpathentry path="org.eclipse.jdt.launching.JRE_CONTAINER" kind="con"></classpathentry>
   <classpathentry path="bin" kind="output"></classpathentry>
-  <classpathentry path="target\scala-2.10\src_managed\main" kind="src"></classpathentry>
+  <classpathentry path="C:\Users\clem\code\play-2.0\framework\.\sbt\boot\scala-2.10.0-RC1\lib\scala-library.jar" kind="lib"></classpathentry>
 </classpath>

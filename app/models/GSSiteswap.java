@@ -18,6 +18,12 @@ public class GSSiteswap {
 	public void setSsName(String aSs) {_ssName = aSs;}
 	
 	public ArrayList<GSMovement> getListMvmt() { return _listMvmt; }
+	
+	public GSMovement newMovement() {
+		GSMovement aMove = new GSMovement();
+		_listMvmt.add(aMove);
+		return aMove;
+	}
 
 	public GSMovement getNext(GSMovement aRefMvmt) {
 		int currentPos;
@@ -37,6 +43,7 @@ public class GSSiteswap {
 		return nextMvmt;
 	}
 	
+	// retourne l'enchainement de position des mains
 	public String asJlabHandNotation() {
 		StringBuilder str = new StringBuilder();
 		GSMovement nextMvmt;
@@ -49,6 +56,7 @@ public class GSSiteswap {
 		return str.toString();
 	}	
 	
+	// retourne le siteswap version vanilla (juste les nombres)
 	public String asVanillaSiteswap() {
 		StringBuilder str = new StringBuilder();
 		GSMovement nextMvmt;

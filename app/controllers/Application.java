@@ -63,7 +63,7 @@ public class Application extends Controller {
 	// cascade
 	ArrayList<GSTest> tests = new ArrayList<GSTest>();
 	GSTest aTest;
-	String 	content = "{\"ssName\": \"cascade\",\"listMvmt\": [{\"ssBase\": \"3\",\"thrHand\": \"r\",\"thrPos\": \"l\",\"catHand\": \"l\",\"catPos\": \"r\"}, {\"ssBase\": \"3\",\"thrHand\": \"l\",\"thrPos\": \"l\",\"catHand\": \"r\",\"catPos\": \"r\"}]}";
+	String 	content = "{\"ssName\": \"cascade\",\"listMvmt\": [{\"ssBase\": \"3\",\"thrHand\": \"r\",\"thrPos\": \"c\",\"catHand\": \"l\",\"catPos\": \"r\"}, {\"ssBase\": \"3\",\"thrHand\": \"l\",\"thrPos\": \"c\",\"catHand\": \"r\",\"catPos\": \"r\"}]}";
 	JsonNode aJNode= Json.parse(content);
 	GSSiteswap aTrick = Json.fromJson(aJNode, GSSiteswap.class);
 	ObjectNode result = Json.newObject();
