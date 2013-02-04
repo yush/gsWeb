@@ -64,6 +64,7 @@ define("gsModule", ["./dojo/request", "./dojo/dom-form", "./dojo/dom", "./dojo/d
 			});
 		},
 		
+		
 		toJLab : function(jsonObject) {
 			console.info(json.stringify(jsonObject));
 			request("gsSiteswap", {
@@ -79,7 +80,23 @@ define("gsModule", ["./dojo/request", "./dojo/dom-form", "./dojo/dom", "./dojo/d
 			}, function(err) {
 				console.info("Error:" + err);
 			});
+		},
+		
+		saveToDb: function() {
+			request("gsSave", {
+				handleAs : "text/html",
+				data : this.getSsToJson() ,
+				method : "PUT",
+				headers : {
+					"Content-Type" : "application/json"
+				}
+			}).then(function(response) {
+				console.info(response);
+			}, function(err) {
+				console.info("Error:" + err);
+			});
 		}
+					
 	};
 	return Trick;
 });

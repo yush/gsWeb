@@ -1,14 +1,25 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.swing.text.StyledEditorKit.ForegroundAction;
+
+import play.db.ebean.*;
 
 import models.GSMovement;
 
-public class GSSiteswap {
+@Entity
+public class GSSiteswap extends Model {
+	@Id
+	public Long id;	
 	private String _ssName;
-	private ArrayList<GSMovement> _listMvmt;
+	@OneToMany(cascade=CascadeType.ALL)
+	private List<GSMovement> _listMvmt;
 	
 	public GSSiteswap() {
 		_listMvmt = new ArrayList<GSMovement>();
@@ -17,7 +28,7 @@ public class GSSiteswap {
 	public String getSsName() {return _ssName;}
 	public void setSsName(String aSs) {_ssName = aSs;}
 	
-	public ArrayList<GSMovement> getListMvmt() { return _listMvmt; }
+	public List<GSMovement> getListMvmt() { return _listMvmt; }
 	
 	public GSMovement newMovement() {
 		GSMovement aMove = new GSMovement();

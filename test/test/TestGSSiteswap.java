@@ -103,4 +103,24 @@ public class TestGSSiteswap {
 		aMove.setCatPos(Constantes.R_POS);
 		assertEquals("Windmill large", "(-32)(32).(32)(-32).", aTrick.asJlabHandNotation());		
 	}	
+	
+	@Test
+	public void testHalfShower() {
+		GSMovement aMove;
+		GSSiteswap aTrick = new GSSiteswap();
+		aMove = aTrick.newMovement();
+		aMove.setSsBase("5");
+		aMove.setThrHand(Constantes.RIGHT_HAND);
+		aMove.setThrPos(Constantes.R_POS);
+		aMove.setCatHand(Constantes.LEFT_HAND);
+		aMove.setCatPos(Constantes.L_POS);
+				
+		aMove = aTrick.newMovement();
+		aMove.setSsBase("3");
+		aMove.setThrHand(Constantes.LEFT_HAND);
+		aMove.setThrPos(Constantes.L_POS);
+		aMove.setCatHand(Constantes.RIGHT_HAND);
+		aMove.setCatPos(Constantes.R_POS);
+		assertEquals("Half Shower", "(32)(0).(32)(0).", aTrick.asJlabHandNotation());		
+	}	
 }

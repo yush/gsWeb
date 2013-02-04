@@ -1,7 +1,17 @@
 package models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
-public class GSMovement {
+import play.db.ebean.*;
+
+@Entity
+public class GSMovement extends Model {
+	@Id
+	public Long id;
+	@ManyToOne
+	public GSSiteswap parentTrick;
 	private String _ssBase;
 	private String _thrHand; 
 	private String _thrPos;

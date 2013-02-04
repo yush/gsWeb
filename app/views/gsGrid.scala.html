@@ -23,6 +23,10 @@
 					 }
 				 });
 							 
+				 on(dom.byId("btnSaveTrick"), "click", function() {
+				 	console.info("save");
+					trick.saveToDb();
+				 });
 						
 		});
 
@@ -76,4 +80,8 @@
 		<button data-dojo-type="dijit/form/Button" id="btnAddCol">
 			Add ss
 		</button>
+		<button data-dojo-type="dijit/form/Button" id="btnSaveTrick">
+			Save
+		</button>
+		
 }

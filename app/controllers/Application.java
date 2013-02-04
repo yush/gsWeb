@@ -12,6 +12,8 @@ import org.codehaus.jackson.*;
 import org.codehaus.jackson.map.*;
 import org.codehaus.jackson.node.*;
 
+import com.avaje.ebean.Ebean;
+
 import views.html.*;
 import models.GSMovement;
 import models.GSSiteswap;
@@ -74,51 +76,14 @@ public class Application extends Controller {
 	aTest.setaSs(aTrick);
 	tests.add(aTest);
 	
-	// cascade inversé
-	content = "{\"ssName\": \"cascade inverse\",\"listMvmt\": [{\"ssBase\": \"3\",\"thrHand\": \"r\",\"thrPos\": \"r\",\"catHand\": \"l\",\"catPos\":\"c\"}, {\"ssBase\": \"3\",\"thrHand\": \"l\",\"thrPos\": \"l\",\"catHand\": \"r\",\"catPos\": \"c\"}]}";
-	aJNode= Json.parse(content);
-	aTrick = Json.fromJson(aJNode, GSSiteswap.class);
-	aTest = new GSTest();
-	aTest.setName("cascade inverse");
-	aTest.setExpVnSs("3");
-	aTest.setExpHands("(32)(0).(32)(0).");
-	aTest.setaSs(aTrick);
-	tests.add(aTest);
-	
-	// test half shower
-	content = "{\"ssName\": \"half shower\",\"listMvmt\": [{\"ssBase\": \"3\",\"thrHand\": \"r\",\"thrPos\": \"l\",\"catHand\": \"l\",\"catPos\": \"r\"}, {\"ssBase\": \"3\",\"thrHand\": \"l\",\"thrPos\": \"l\",\"catHand\": \"r\",\"catPos\": \"r\"}]}";
-	aJNode= Json.parse(content);
-	aTrick = Json.fromJson(aJNode, GSSiteswap.class);
-	aTest = new GSTest();
-	aTest.setName("half shower");
-	aTest.setExpVnSs("3");
-	aTest.setExpHands("(32)(0).(0)(32).");
-	aTest.setaSs(aTrick);
-	tests.add(aTest);
-	
-	// test windmill
-	content = "{\"ssName\": \"windmill\",\"listMvmt\": [{\"ssBase\": \"3\",\"thrHand\": \"r\",\"thrPos\": \"l\",\"catHand\": \"l\",\"catPos\": \"r\"}, {\"ssBase\": \"3\",\"thrHand\": \"l\",\"thrPos\": \"l\",\"catHand\": \"r\",\"catPos\": \"r\"}]}";
-	aJNode= Json.parse(content);
-	aTrick = Json.fromJson(aJNode, GSSiteswap.class);
-	aTest = new GSTest();
-	aTest.setName("windmill");
-	aTest.setExpVnSs("3");
-	aTest.setExpHands("(-32)(0).(32)(0).");
-	aTest.setaSs(aTrick);
-	tests.add(aTest);
-
-	// test 4b
-	content = "{\"ssName\": \"4b\",\"listMvmt\": [{\"ssBase\": \"4\",\"thrHand\": \"r\",\"thrPos\": \"l\",\"catHand\": \"l\",\"catPos\": \"r\"}, {\"ssBase\": \"4\",\"thrHand\": \"l\",\"thrPos\": \"l\",\"catHand\": \"r\",\"catPos\": \"r\"}]}";
-	aJNode= Json.parse(content);
-	aTrick = Json.fromJson(aJNode, GSSiteswap.class);
-	aTest = new GSTest();
-	aTest.setName("4b");
-	aTest.setExpVnSs("4");
-	aTest.setExpHands("(-32)(0).(32)(0).");
-	aTest.setaSs(aTrick);
-	tests.add(aTest);
-	
 	return ok(testTricks.render(tests)); 
+  }
+  
+  public static Result gsSave() {	
+	JsonNode aJNode= request().body().asJson();
+	GSSiteswap aTrick = Json.fromJson(aJNode, GSSiteswap.class);
+	Ebean.save(aTrick);  
+	return ok("id:"+ aTrick.id);
   }
   
 }
