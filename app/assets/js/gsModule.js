@@ -9,7 +9,7 @@ define("gsModule", ["./dojo/request", "./dojo/dom-form", "./dojo/dom", "./dojo/d
 		catHand = domForm.fieldToObject("catHand-" + num);
 		catPos = domForm.fieldToObject("catPos-" + num);
 
-		// retourne un Ss en Json
+		// retourne un Ss/mouvement en Json
 		this.toJson = function() {
 			return '{"ssBase":"' + ssBase + '", ' + '"thrHand":"' + thrHand + '", ' + '"thrPos":"' + thrPos + '", ' + '"catHand":"' + catHand + '", ' + '"catPos":"' + catPos + '"' + '}';
 		}
@@ -64,7 +64,7 @@ define("gsModule", ["./dojo/request", "./dojo/dom-form", "./dojo/dom", "./dojo/d
 			});
 		},
 		
-		
+		// envoie le json du tricks au serveur. Le serveur retourne l'applet configurée
 		toJLab : function(jsonObject) {
 			console.info(json.stringify(jsonObject));
 			request("gsSiteswap", {
@@ -82,6 +82,7 @@ define("gsModule", ["./dojo/request", "./dojo/dom-form", "./dojo/dom", "./dojo/d
 			});
 		},
 		
+		// envoie le json au serveur pour sauvegarde
 		saveToDb: function() {
 			request("gsSave", {
 				handleAs : "text/html",

@@ -1,5 +1,6 @@
 package models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -10,8 +11,8 @@ import play.db.ebean.*;
 public class GSMovement extends Model {
 	@Id
 	public Long id;
-	@ManyToOne
-	public GSSiteswap parentTrick;
+//	@ManyToOne(cascade=CascadeType.ALL)
+//	GSSiteswap parentTrick;
 	private String _ssBase;
 	private String _thrHand; 
 	private String _thrPos;

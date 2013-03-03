@@ -10,14 +10,17 @@
 GET		/							controllers.Application.gsGrid()
 
 # Post
-POST  /gsSiteswap						controllers.Application.gsSiteswap()
-POST  /juggleTest							controllers.Application.juggleTest()
+POST  /gsSiteswap					controllers.Application.gsSiteswap()
+POST  /juggleTest					controllers.Application.juggleTest()
 
 # Get
-GET		/gsGrid							controllers.Application.gsGrid()
-GET		/ssJson							controllers.Application.ssJson()
-GET		/testTricks						controllers.Application.testTricks()
-GET		/juggleDemo						controllers.Application.juggleDemo()
+GET		/gsGrid						controllers.Application.gsGrid()
+GET		/ssJson						controllers.Application.ssJson()
+GET		/testTricks					controllers.Application.testTricks()
+GET		/juggleDemo					controllers.Application.juggleDemo()
+GET		/tricks						controllers.Application.loadListTricks()
+GET		/tricks/:id					controllers.Application.loadTrick(id:Long)
+
 
 # Put
 PUT		/gsSave						controllers.Application.gsSave()

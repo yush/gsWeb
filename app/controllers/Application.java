@@ -22,6 +22,7 @@ import models.GSTest;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Application extends Controller {
   
@@ -30,7 +31,8 @@ public class Application extends Controller {
   }
   
   public static Result gsGrid() {
-	  return ok(gsGrid.render());
+	  List<GSSiteswap> listTricks = GSSiteswap.getAllTricks();
+	  return ok(gsGrid.render(listTricks));
   }
   
   public static Result jlab() {
@@ -84,6 +86,21 @@ public class Application extends Controller {
 	GSSiteswap aTrick = Json.fromJson(aJNode, GSSiteswap.class);
 	Ebean.save(aTrick);  
 	return ok("id:"+ aTrick.id);
+  }
+  
+  public static Result loadListTricks() {
+	  List<GSSiteswap> listTtricks = GSSiteswap.getAllTricks();
+	  return ok(listTricks.render(listTtricks));
+  }
+  
+  public static Result loadTrick(long id) {
+	  GSSiteswap aTrick = GSSiteswap.find.byId(id);
+	  if (aTrick != null) { 
+			return ok(gsSiteswap.render(aTrick.asVanillaSiteswap() , aTrick.asJlabHandNotation()));
+
+	  } else {
+		  return badRequest("Erreur lors du chargement");
+	  }
   }
   
 }

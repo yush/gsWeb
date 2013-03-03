@@ -1,4 +1,6 @@
-@main("Saisie du siteswap généralisé") {
+@(tricks: java.util.List[models.GSSiteswap])
+
+@main("Generalized") {
 
 		<script>
 			require(["dojo/dom", "dojo/on", "dojo/request", "dojo/parser", "dojo/json", "gsModule", "dijit/form/Button", "dijit/form/ComboBox", "dijit/form/Select", "dojo/domReady!"], 
@@ -12,6 +14,9 @@
 					 trick.addCol();
 				 });
 				 
+				 // play:
+				 //  * genere le JSON à partir du formulaire
+				 //  * 
 				 on(dom.byId("convertFields"), "click", function() {
 					 strJson = trick.getSsToJson();
 					 dom.byId("output").innerHTML = strJson;
@@ -84,4 +89,6 @@
 			Save
 		</button>
 		
+} {
+	@listTricks(tricks)
 }

@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.swing.text.StyledEditorKit.ForegroundAction;
 
+import com.avaje.ebean.Ebean;
+
 import play.db.ebean.*;
 
 import models.GSMovement;
@@ -19,7 +21,7 @@ public class GSSiteswap extends Model {
 	public Long id;	
 	private String _ssName;
 	@OneToMany(cascade=CascadeType.ALL)
-	private List<GSMovement> _listMvmt;
+	List<GSMovement> _listMvmt;
 	
 	public GSSiteswap() {
 		_listMvmt = new ArrayList<GSMovement>();
@@ -77,4 +79,14 @@ public class GSSiteswap extends Model {
 		return str.toString();		
 	}
 	
+	public static Model.Finder<Long, GSSiteswap> find = new Model.Finder<Long, GSSiteswap>(
+			Long.class, GSSiteswap.class);	
+	
+
+	public static List<GSSiteswap> getAllTricks() {
+		List<GSSiteswap> tricks = new ArrayList<GSSiteswap>();
+		tricks = Ebean.find(GSSiteswap.class)
+				.findList(); 
+		return tricks; 
+	}	
 }
